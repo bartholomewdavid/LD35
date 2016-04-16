@@ -11,11 +11,13 @@ ig.module(
         animSheet: new ig.AnimationSheet('media/base.png', 32, 32),
         size: {x: 18, y: 20},
         offset: {x: 7, y: 12},
+        type: ig.Entity.TYPE.A,
         collides: ig.Entity.COLLIDES.ACTIVE,
         xFlip: false,
         element: Element.NONE,
         direction: 'down',
         speed: 40,
+        isCharacter: true,
 
         init: function(x, y, settings) {
             this.addAnim('idleNone', 0.333, [0]);
@@ -39,6 +41,16 @@ ig.module(
                 this.element = Element.WATER;
             }
 
+            if (ig.input.pressed('shapeshift')) {
+                switch (this.element) {
+                    case 'None':
+                        this.element = 'Water'
+                        break;
+                    case 'Water':
+                        this.element = 'None'
+                        break;
+                }
+            }
 
             // Movement
             if (ig.input.state('up')) {
@@ -88,7 +100,7 @@ ig.module(
                     var center = this._center()
 
                     ig.game.spawnEntity(
-                        EntityCharacterAttack,
+                        EntityCharacterattack,
                         center.x, center.y,
                         {
                             element: this.element,
@@ -104,8 +116,8 @@ ig.module(
 
         _center: function() {
             return {
-                x: this.pos.x + (this.size.x / 2), // TODO Offset if we use it
-                y: this.pos.y + (this.size.y / 2), // TODO Offset if we use it
+                x: this.pos.x + (this.size.x / 2),
+                y: this.pos.y + (this.size.y / 2),
             }
         }
     });

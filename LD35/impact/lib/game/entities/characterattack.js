@@ -8,17 +8,19 @@ ig.module(
     'impact.timer'
 )
 .defines(function() {
-    EntityCharacterAttack = EntityBase.extend({
+    EntityCharacterattack = EntityBase.extend({
         animSheet: new ig.AnimationSheet('media/baseattack.png', 8, 8),
         size: {x: 8, y: 8},
-        collides: ig.Entity.COLLIDES.NONE,
+        collides: ig.Entity.COLLIDES.NEVER,
+        checkAgainst: ig.Entity.TYPE.B,
+        type: ig.Entity.TYPE.NONE,
         xFlip: false,
         yFlip: false,
         element: Element.NONE,
         direction: 'down',
         speed: 100,
         friction: {x: 0, y: 0},
-        lifeDuration: 1,
+        lifeDuration: 1.5,
         lifeTimer: null,
 
         init: function(x, y, settings) {
@@ -34,6 +36,11 @@ ig.module(
 
             this.pos.x -= this.size.x / 2
             this.pos.y -= this.size.y / 2
+        },
+        
+        check: function(other) {
+            other.receiveDamage(1, this)
+            this.kill()
         },
 
         update: function() {

@@ -5,6 +5,7 @@ ig.module(
 	'impact.game',
 	'impact.font',
     'game.levels.world',
+    'game.levels.test',
     'game.entities.character',
     'plugins.touch-button'
 )
@@ -19,11 +20,12 @@ MyGame = ig.Game.extend({
     init: function() {        
         if( ig.ua.mobile ) {
             this.buttons = new ig.TouchButtonCollection([
-                new ig.TouchButton( 'up', {left: 36, bottom: 72}, 48, 48, this.buttonImage, 0 ),
-                new ig.TouchButton( 'right', {left: 72, bottom: 36}, 48, 48, this.buttonImage, 1 ),
-                new ig.TouchButton( 'down', {left: 36, bottom: 0}, 48, 48, this.buttonImage, 2 ),
-                new ig.TouchButton( 'left', {left: 0, bottom: 36}, 48, 48, this.buttonImage, 3 ),
-                new ig.TouchButton( 'attack', {right: 72, bottom: 0}, 48, 48, this.buttonImage, 4 ),
+                new ig.TouchButton( 'up', {left: 24, bottom: 48}, 24, 24, this.buttonImage, 0 ),
+                new ig.TouchButton( 'right', {left: 48, bottom: 24}, 24, 24, this.buttonImage, 1 ),
+                new ig.TouchButton( 'down', {left: 24, bottom: 0}, 24, 24, this.buttonImage, 2 ),
+                new ig.TouchButton( 'left', {left: 0, bottom: 24}, 24, 24, this.buttonImage, 3 ),
+                new ig.TouchButton( 'attack', {right: 12, bottom: 12}, 24, 24, this.buttonImage, 4 ),
+                new ig.TouchButton( 'shapeshift', {right: 12, bottom: 48}, 24, 24, this.buttonImage, 4 ),
             ]);
             
             // Align the touch buttons to the screen edges; you have 
@@ -45,7 +47,7 @@ MyGame = ig.Game.extend({
             ig.input.bind( ig.KEY._2, 'two')
         }
         
-        this.loadLevel( LevelWorld )
+        this.loadLevel( LevelTest )
         
         this.player = this.getEntitiesByType( EntityCharacter )[0]
     },
@@ -97,12 +99,13 @@ $(document).ready(function() {
 $(document).on("orientationchange", function() {
 	var dim = dimensions()
     ig.system.resize(dim.x / scale, dim.y / scale, scale)
+    ig.game.buttons.align()
 });
 
 $(window).on('resize', function() {
     var dim = dimensions()
-    console.log(dim)
     ig.system.resize(dim.x / scale, dim.y / scale, scale)
+    ig.game.buttons.align();
 })
 
 });
