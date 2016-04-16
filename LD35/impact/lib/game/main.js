@@ -15,14 +15,17 @@ MyGame = ig.Game.extend({
     init: function() {
         // initialize your game world, bind some 
         // keys, etc.
-        ig.input.bind( ig.KEY.UP_ARROW, 'up' );
-        ig.input.bind( ig.KEY.DOWN_ARROW, 'down' );
-        ig.input.bind( ig.KEY.LEFT_ARROW, 'left' );
-        ig.input.bind( ig.KEY.RIGHT_ARROW, 'right' );
+        ig.input.bind( ig.KEY.UP_ARROW, 'up' )
+        ig.input.bind( ig.KEY.DOWN_ARROW, 'down' )
+        ig.input.bind( ig.KEY.LEFT_ARROW, 'left' )
+        ig.input.bind( ig.KEY.RIGHT_ARROW, 'right' )
         
-        ig.input.bind( ig.KEY.K, 'k' );
+        ig.input.bind( ig.KEY.PERIOD, 'attack')
         
-        this.loadLevel( LevelWorld );
+        ig.input.bind( ig.KEY._1, 'one')
+        ig.input.bind( ig.KEY._2, 'two')
+        
+        this.loadLevel( LevelWorld )
         
         this.player = this.getEntitiesByType( EntityCharacter )[0]
     },

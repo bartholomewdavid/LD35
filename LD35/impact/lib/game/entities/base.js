@@ -15,7 +15,6 @@ ig.module(
         checkAgainst: ig.Entity.TYPE.BOTH,
         speed: 40,
         zIndex: 1000,
-        collides: ig.Entity.COLLIDES.ACTIVE,
         element: Element.NONE,
         xFlip: false,
         currentAnimString: null,
