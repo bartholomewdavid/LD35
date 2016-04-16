@@ -40,18 +40,18 @@ ig.module(
             if (ig.input.pressed('two')) {
                 this.element = Element.WATER;
             }
-            
+
             if (ig.input.pressed('shapeshift')) {
                 switch (this.element) {
                     case Element.NONE:
-                        this.element = Element.WATER;
+                        this.element = Element.WATER
                         break;
                     case Element.WATER:
-                        this.element = Element.NONE;
+                        this.element = Element.NONE
                         break;
                 }
             }
-            
+
             // Movement
             if (ig.input.state('up')) {
                 this.vel.y = -this.speed;
