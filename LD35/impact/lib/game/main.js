@@ -28,21 +28,20 @@ MyGame = ig.Game.extend({
     },
     
     update: function() {
-        //debugger;
+        this.parent();
+        
         if (this.player) {
             this.screen.x = 
                 this.player.pos.x - (ig.system.width / 2)
             this.screen.y = 
                 this.player.pos.y - (ig.system.height / 2)
         }
-        
-        this.parent();
     }
 });
 
 
 // Start the Game with 62fps, a resolution of 322x242, scaled
 // up by a factor of 2
-ig.main( '#canvas', MyGame, 62, 320, 320, 4 );
+ig.main( '#canvas', MyGame, 62, 320, 320, 2 );
 
 });
