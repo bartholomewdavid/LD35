@@ -158,7 +158,7 @@ LevelWorld=/*JSON[*/{
 			"width": 128,
 			"height": 128,
 			"linkWithCollision": false,
-			"visible": true,
+			"visible": 1,
 			"tilesetName": "",
 			"repeat": false,
 			"preRender": false,

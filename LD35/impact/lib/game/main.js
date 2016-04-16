@@ -5,25 +5,45 @@ ig.module(
 	'impact.game',
 	'impact.font',
     'game.levels.world',
-    'game.entities.character'
+    'game.entities.character',
+    'plugins.touch-button'
 )
 .defines(function(){
 
 MyGame = ig.Game.extend({
     player: null,
     
-    init: function() {
-        // initialize your game world, bind some 
-        // keys, etc.
-        ig.input.bind( ig.KEY.UP_ARROW, 'up' )
-        ig.input.bind( ig.KEY.DOWN_ARROW, 'down' )
-        ig.input.bind( ig.KEY.LEFT_ARROW, 'left' )
-        ig.input.bind( ig.KEY.RIGHT_ARROW, 'right' )
-        
-        ig.input.bind( ig.KEY.PERIOD, 'attack')
-        
-        ig.input.bind( ig.KEY._1, 'one')
-        ig.input.bind( ig.KEY._2, 'two')
+    buttons: null,
+    buttonImage: new ig.Image( 'media/buttons.png' ),
+    
+    init: function() {        
+        if( ig.ua.mobile ) {
+            this.buttons = new ig.TouchButtonCollection([
+                new ig.TouchButton( 'up', {left: 36, bottom: 72}, 48, 48, this.buttonImage, 0 ),
+                new ig.TouchButton( 'right', {left: 72, bottom: 36}, 48, 48, this.buttonImage, 1 ),
+                new ig.TouchButton( 'down', {left: 36, bottom: 0}, 48, 48, this.buttonImage, 2 ),
+                new ig.TouchButton( 'left', {left: 0, bottom: 36}, 48, 48, this.buttonImage, 3 ),
+                new ig.TouchButton( 'attack', {right: 72, bottom: 0}, 48, 48, this.buttonImage, 4 ),
+            ]);
+            
+            // Align the touch buttons to the screen edges; you have 
+            // to call this function once after creating the 
+            // TouchButtonCollection and then every time you change 
+            // the game's screen size
+            this.buttons.align();
+        } else {
+            // initialize your game world, bind some 
+            // keys, etc.
+            ig.input.bind( ig.KEY.UP_ARROW, 'up' )
+            ig.input.bind( ig.KEY.DOWN_ARROW, 'down' )
+            ig.input.bind( ig.KEY.LEFT_ARROW, 'left' )
+            ig.input.bind( ig.KEY.RIGHT_ARROW, 'right' )
+            
+            ig.input.bind( ig.KEY.PERIOD, 'attack')
+            
+            ig.input.bind( ig.KEY._1, 'one')
+            ig.input.bind( ig.KEY._2, 'two')
+        }
         
         this.loadLevel( LevelWorld )
         
@@ -39,12 +59,50 @@ MyGame = ig.Game.extend({
             this.screen.y = 
                 this.player.pos.y - (ig.system.height / 2)
         }
+    },
+    
+    draw: function() {       
+        this.parent()
+        
+        if( this.buttons ) {
+            this.buttons.draw(); 
+        }
     }
 });
 
+var dimensions = function() {
+    var $window = $(window)
+    var x = $window.innerWidth()
+    var y = $window.innerHeight()
+    
+    if (x % scale) { x -= x % scale }
+    if (y % scale) { y -= y % scale }
+    
+    return {
+        x: x,
+        y: y
+    }
+}
 
-// Start the Game with 62fps, a resolution of 322x242, scaled
-// up by a factor of 2
-ig.main( '#canvas', MyGame, 62, 322, 242, 2 );
+var scale = 2
+if (dimensions().x < 960) {
+    scale = 2
+}
+
+$(document).ready(function() {
+    var dim = dimensions()
+    ig.main( '#canvas', MyGame, 62, dim.x / scale, dim.y / scale, scale );
+})
+
+$(document).on("orientationchange", function() {
+	var dim = dimensions()
+    ig.system.resize(dim.x / scale, dim.y / scale, scale)
+});
+
+$(window).on('resize', function() {
+    var dim = dimensions()
+    console.log(dim)
+    ig.system.resize(dim.x / scale, dim.y / scale, scale)
+})
 
 });

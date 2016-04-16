@@ -8,11 +8,13 @@ ig.module(
 .defines(function() {
     EntityCharacter = EntityBase.extend({
         animSheet: new ig.AnimationSheet('media/base.png', 32, 32),
-        size: {x: 32, y: 32},
+        size: {x: 18, y: 20},
+        offset: {x: 7, y: 12},
         collides: ig.Entity.COLLIDES.ACTIVE,
         xFlip: false,
         element: 'None',
         direction: 'down',
+        speed: 40,
 
         init: function(x, y, settings) {
             this.addAnim('idleNone', 0.333, [0]);
