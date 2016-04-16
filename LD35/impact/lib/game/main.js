@@ -85,7 +85,6 @@ var dimensions = function() {
     }
 }
 
-// TODO maybe sizing?
 var scale = 2
 if (dimensions().x < 960) {
     scale = 2
