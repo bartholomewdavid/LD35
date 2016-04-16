@@ -1,7 +1,7 @@
-tools/
-lib/impact
-lib/weltmeister
-weltmeister.html
+LD35/impact/tools/
+LD35/impact/lib/impact
+LD35/impact/lib/weltmeister
+LD35/impact/weltmeister.html
 server.py
 .DS_Store
 .swp
