@@ -22,6 +22,10 @@ ig.module(
             this.parent( x, y, settings );
         },
 
+        receiveDamage: function(amount, attacker) {
+            var damage = amount * ElementMultiplier[attacker.element][this.element];
+            this.parent(damage, attacker);
+        },
 
         getRandomDirection: function() {
             var directions = [
