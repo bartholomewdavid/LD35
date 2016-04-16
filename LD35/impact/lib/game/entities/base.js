@@ -2,6 +2,7 @@ ig.module(
     'game.entities.base'
 )
 .requires(
+    'game.elements',
     'impact.entity',
     'impact.animation'
 )
