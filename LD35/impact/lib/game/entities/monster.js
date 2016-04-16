@@ -4,12 +4,18 @@ ig.module(
 .requires(
     'game.entities.base',
     'game.elements',
-    'impact.entity',
     'impact.animation'
 )
 .defines(function() {
-    EntityMonster = ig.EntityBase.extend({
+    EntityMonster = EntityBase.extend({
         animSheet: new ig.AnimationSheet('media/monster.png', 32, 32),
+
+        init: function(x, y, settings) {
+            this.addAnim('idle', 0.333, [0]);
+            this.addAnim('walking', 0.333, [1,2,3,4]);
+
+            this.parent( x, y, settings );
+        },
     });
 
     EntityFireMonster = EntityMonster.extend({
