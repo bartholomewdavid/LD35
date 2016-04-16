@@ -2,11 +2,11 @@ ig.module(
     'game.entities.eyeball'
 )
 .requires(
-    'game.entities.base',
+    'game.entities.monster',
     'game.entities.eyeball.eyeballsensor'
 )
 .defines(function() {
-    EntityEyeball = EntityBase.extend({
+    EntityEyeball = EntityMonster.extend({
         animSheet: new ig.AnimationSheet('media/eyeballs.png', 32, 32),
         size: {x: 32, y: 32},
         type: ig.Entity.TYPE.B,
@@ -15,13 +15,12 @@ ig.module(
         xFlip: false,
         element: 'Water',
         speed: 12,
-        aggroTarget: null,
         health: 10,
+        damage: 0,
 
         init: function(x, y, settings) {
             this.addAnim('idleWater', 0.333, [0,1,2]);
             this.addAnim('idleFire', 0.333, [3,4,5]);
-
             this.parent( x, y, settings );
             
             ig.game.spawnEntity(
@@ -30,6 +29,10 @@ ig.module(
                 {
                     owner: this
                 })
+        },
+        
+        check: function(other) {
+            other.receiveDamage(this.damage, this)
         },
 
         update: function() {
