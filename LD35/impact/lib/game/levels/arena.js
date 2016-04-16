@@ -1,10 +1,10 @@
 ig.module( 'game.levels.arena' )
-.requires( 'impact.image','game.entities.gladiator' )
+.requires( 'impact.image','game.entities.character' )
 .defines(function(){
 LevelArena=/*JSON[*/{
 	"entities": [
 		{
-			"type": "EntityGladiator",
+			"type": "EntityCharacter",
 			"x": 152,
 			"y": 176
 		}
