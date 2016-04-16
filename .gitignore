@@ -2,4 +2,6 @@ tools/
 lib/impact
 lib/weltmeister
 weltmeister.html
-jsconfig.json
+server.py
+.DS_Store
+.swp
