@@ -6,7 +6,7 @@ ig.module(
 )
 .defines(function() {
     EntityEyeballsensor = EntityBase.extend({
-        size: {x: 400, y: 400},
+        size: {x: 128, y: 128},
         collides: ig.Entity.COLLIDES.NEVER,
         type: ig.Entity.TYPE.NONE,
         checkAgainst: ig.Entity.TYPE.A,

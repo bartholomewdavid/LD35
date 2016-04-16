@@ -18,6 +18,7 @@ ig.module(
         direction: 'down',
         speed: 40,
         isCharacter: true,
+        health: 5,
 
         init: function(x, y, settings) {
             this.addAnim('idleNone', 0.333, [0]);
