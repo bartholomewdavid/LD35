@@ -1,5 +1,5 @@
 ig.module( 'game.levels.world' )
-.requires( 'impact.image','game.entities.character' )
+.requires( 'impact.image','game.entities.character','game.entities.monster' )
 .defines(function(){
 LevelWorld=/*JSON[*/{
 	"entities": [
@@ -7,6 +7,11 @@ LevelWorld=/*JSON[*/{
 			"type": "EntityCharacter",
 			"x": 268,
 			"y": 312
+		},
+		{
+			"type": "EntityMonster",
+			"x": 404,
+			"y": 232
 		}
 	],
 	"layer": [
