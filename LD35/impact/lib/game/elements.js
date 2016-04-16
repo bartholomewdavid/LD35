@@ -3,10 +3,10 @@ ig.module(
 )
 .defines(function() {
     Element = {
-        NONE: 0,
-        EARTH: 1,
-        WIND: 2,
-        FIRE: 3,
-        WATER: 4
+        NONE: 'None',
+        EARTH: 'Earth',
+        WIND: 'Wind',
+        FIRE: 'Fire',
+        WATER: 'Water'
     }
 });
