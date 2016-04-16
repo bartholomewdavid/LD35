@@ -8,7 +8,7 @@ ig.module(
 )
 .defines(function() {
     EntityMonster = EntityBase.extend({
-        animSheet: new ig.AnimationSheet('media/monster.png', 32, 32),
+        //animSheet: new ig.AnimationSheet('media/monster.png', 32, 32),
 
         init: function(x, y, settings) {
             this.addAnim('idle', 0.333, [0]);

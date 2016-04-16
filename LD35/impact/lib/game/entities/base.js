@@ -3,24 +3,11 @@ ig.module(
 )
 .requires(
     'game.elements',
-    'impact.entity',
-    'impact.animation'
+    'impact.entity'
 )
 .defines(function() {
     EntityBase = ig.Entity.extend({
-        size: {x: 8, y: 8},
-        offset: {x: 12, y: 24},
         friction: {x: 0, y: 0},
-        type: ig.Entity.TYPE.A,
-        checkAgainst: ig.Entity.TYPE.BOTH,
-        speed: 40,
-        zIndex: 1000,
         element: Element.NONE,
-        xFlip: false,
-        currentAnimString: null,
-
-        draw: function() {
-            this.parent();
-        },
     });
 });
