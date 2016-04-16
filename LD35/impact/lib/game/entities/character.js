@@ -2,6 +2,7 @@ ig.module(
     'game.entities.character'
 )
 .requires(
+    'game.elements',
     'game.entities.base',
     'game.entities.characterattack'
 )
@@ -12,7 +13,7 @@ ig.module(
         offset: {x: 7, y: 12},
         collides: ig.Entity.COLLIDES.ACTIVE,
         xFlip: false,
-        element: 'None',
+        element: Element.NONE,
         direction: 'down',
         speed: 40,
 
@@ -32,13 +33,13 @@ ig.module(
         update: function() {
             // Elemental Animation Sets
             if (ig.input.pressed('one')) {
-                this.element = 'None'
+                this.element = Element.NONE;
             }
             if (ig.input.pressed('two')) {
-                this.element = 'Water'
+                this.element = Element.WATER;
             }
-            
-            
+
+
             // Movement
             if (ig.input.state('up')) {
                 this.vel.y = -this.speed;
@@ -59,33 +60,33 @@ ig.module(
             }
 
             if (this.vel.y > 0) {
-                this.currentAnimString = 'walkingDown'
-                this.direction = 'down'
+                this.currentAnimString = 'walkingDown';
+                this.direction = 'down';
             } else if (this.vel.y < 0) {
-                this.currentAnimString = 'walkingUp'
-                this.direction = 'up'
+                this.currentAnimString = 'walkingUp';
+                this.direction = 'up';
             } else if (this.vel.x != 0) {
-                this.currentAnimString = 'walkingLeftRight'
+                this.currentAnimString = 'walkingLeftRight';
                 if (this.vel.x < 0) {
-                    this.direction = 'left'
+                    this.direction = 'left';
                 }
                 if (this.vel.x > 0) {
-                    this.direction = 'right'
+                    this.direction = 'right';
                 }
             } else {
-                this.currentAnimString = 'idle'
+                this.currentAnimString = 'idle';
             }
 
             // Animation Set and Flipping
-            this.currentAnim = this.anims[this.currentAnimString+this.element]
-            this.currentAnim.flip.x = this.xFlip
+            this.currentAnim = this.anims[this.currentAnimString+this.element];
+            this.currentAnim.flip.x = this.xFlip;
 
             // Attacking
             if (ig.input.pressed('attack')) {
-                if (this.element != 'None') {
+                if (this.element != Element.NONE) {
                     // Attacking
                     var center = this._center()
-                    
+
                     ig.game.spawnEntity(
                         EntityCharacterAttack,
                         center.x, center.y,
@@ -100,7 +101,7 @@ ig.module(
 
             this.parent();
         },
-        
+
         _center: function() {
             return {
                 x: this.pos.x + (this.size.x / 2), // TODO Offset if we use it
