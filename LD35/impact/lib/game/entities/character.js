@@ -43,11 +43,11 @@ ig.module(
             
             if (ig.input.pressed('shapeshift')) {
                 switch (this.element) {
-                    case 'None':
-                        this.element = 'Water'
+                    case Element.NONE:
+                        this.element = Element.WATER;
                         break;
-                    case 'Water':
-                        this.element = 'None'
+                    case Element.WATER:
+                        this.element = Element.NONE;
                         break;
                 }
             }
