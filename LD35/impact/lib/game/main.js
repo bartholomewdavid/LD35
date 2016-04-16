@@ -4,7 +4,6 @@ ig.module(
 .requires(
 	'impact.game',
 	'impact.font',
-	'game.entities.gladiator',
     'game.levels.arena'
 )
 .defines(function(){

@@ -1,33 +1,8 @@
 ig.module( 'game.levels.arena' )
-.requires( 'impact.image','game.entities.torch','game.entities.gladiator' )
+.requires( 'impact.image','game.entities.gladiator' )
 .defines(function(){
 LevelArena=/*JSON[*/{
 	"entities": [
-		{
-			"type": "EntityTorch",
-			"x": 68,
-			"y": 124
-		},
-		{
-			"type": "EntityTorch",
-			"x": 68,
-			"y": 224
-		},
-		{
-			"type": "EntityTorch",
-			"x": 148,
-			"y": 84
-		},
-		{
-			"type": "EntityTorch",
-			"x": 220,
-			"y": 120
-		},
-		{
-			"type": "EntityTorch",
-			"x": 224,
-			"y": 220
-		},
 		{
 			"type": "EntityGladiator",
 			"x": 152,
