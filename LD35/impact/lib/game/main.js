@@ -5,6 +5,7 @@ ig.module(
 	'impact.game',
 	'impact.font',
     'game.levels.world',
+    'game.levels.test',
     'game.entities.character',
     'plugins.touch-button'
 )
@@ -46,7 +47,7 @@ MyGame = ig.Game.extend({
             ig.input.bind( ig.KEY._2, 'two')
         }
         
-        this.loadLevel( LevelWorld )
+        this.loadLevel( LevelTest )
         
         this.player = this.getEntitiesByType( EntityCharacter )[0]
     },
