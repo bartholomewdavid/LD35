@@ -2,3 +2,5 @@ tools/
 lib/impact
 lib/weltmeister
 weltmeister.html
+server.py
+.DS_Store
