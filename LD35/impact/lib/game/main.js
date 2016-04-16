@@ -42,6 +42,6 @@ MyGame = ig.Game.extend({
 
 // Start the Game with 62fps, a resolution of 322x242, scaled
 // up by a factor of 2
-ig.main( '#canvas', MyGame, 62, 320, 320, 2 );
+ig.main( '#canvas', MyGame, 62, 322, 242, 2 );
 
 });
