@@ -7,8 +7,26 @@ ig.module(
     'impact.animation'
 )
 .defines(function() {
-    EntityCharacter = EntityBase.extend({
+    EntityCharacter = ig.Entity.extend({
+        size: {x: 8, y: 8},
+        offset: {x: 12, y: 24},
         animSheet: new ig.AnimationSheet('media/base.png', 32, 32),
+        friction: {x: 0, y: 0},
+        type: ig.Entity.TYPE.A,
+        checkAgainst: ig.Entity.TYPE.BOTH,
+        speed: 40,
+        zIndex: 1000,
+        collides: ig.Entity.COLLIDES.ACTIVE,
+
+        xFlip: false,
+        currentAnimString: null,
+
+        init: function(x, y, settings) {
+            this.addAnim('idle', 0.333, [0]);
+            this.addAnim('walking', 0.333, [1,2,3,4]);
+
+            this.parent( x, y, settings );
+        },
 
         update: function() {
             if (ig.input.state('up')) {

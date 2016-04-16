@@ -4,11 +4,14 @@ ig.module(
 .requires(
 	'impact.game',
 	'impact.font',
-    'game.levels.arena'
+    'game.levels.world',
+    'game.entities.character'
 )
 .defines(function(){
 
 MyGame = ig.Game.extend({
+    player: null,
+    
     init: function() {
         // initialize your game world, bind some 
         // keys, etc.
@@ -19,13 +22,27 @@ MyGame = ig.Game.extend({
         
         ig.input.bind( ig.KEY.K, 'k' );
         
-        this.loadLevel( LevelArena );
+        this.loadLevel( LevelWorld );
+        
+        this.player = this.getEntitiesByType( EntityCharacter )[0]
+    },
+    
+    update: function() {
+        //debugger;
+        if (this.player) {
+            this.screen.x = 
+                this.player.pos.x - (ig.system.width / 2)
+            this.screen.y = 
+                this.player.pos.y - (ig.system.height / 2)
+        }
+        
+        this.parent();
     }
 });
 
 
 // Start the Game with 62fps, a resolution of 322x242, scaled
 // up by a factor of 2
-ig.main( '#canvas', MyGame, 62, 320, 320, 2 );
+ig.main( '#canvas', MyGame, 62, 320, 320, 4 );
 
 });
