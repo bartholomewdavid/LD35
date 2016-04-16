@@ -20,13 +20,6 @@ ig.module(
         xFlip: false,
         currentAnimString: null,
 
-        init: function(x, y, settings) {
-            this.addAnim('idle', 0.1, [0]);
-            this.addAnim('walking', 0.1, [0,1,2]);
-
-            this.parent( x, y, settings );
-        },
-
         draw: function() {
             this.parent();
         },

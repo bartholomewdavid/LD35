@@ -3,23 +3,11 @@ ig.module(
 )
 .requires(
     'game.entities.base',
-    'impact.entity',
     'impact.animation'
 )
 .defines(function() {
-    EntityCharacter = ig.Entity.extend({
-        size: {x: 8, y: 8},
-        offset: {x: 12, y: 24},
+    EntityCharacter = EntityBase.extend({
         animSheet: new ig.AnimationSheet('media/base.png', 32, 32),
-        friction: {x: 0, y: 0},
-        type: ig.Entity.TYPE.A,
-        checkAgainst: ig.Entity.TYPE.BOTH,
-        speed: 40,
-        zIndex: 1000,
-        collides: ig.Entity.COLLIDES.ACTIVE,
-
-        xFlip: false,
-        currentAnimString: null,
 
         init: function(x, y, settings) {
             this.addAnim('idle', 0.333, [0]);
@@ -58,6 +46,5 @@ ig.module(
 
             this.parent();
         },
-
     });
 });
