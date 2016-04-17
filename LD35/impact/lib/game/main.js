@@ -20,25 +20,9 @@ MyGame = ig.Game.extend({
     attackButtons: null,
     shapeshitButtons: null,
     buttonImage: new ig.Image( 'media/buttons.png' ),
-    // buttonImage: new ig.Image( 'media/buttonsbig.png' ),
     
     init: function() {        
         if( ig.ua.mobile ) {
-            // If scale is 1
-            // this.movementButtons = new ig.TouchButtonCollection([
-            //     new ig.TouchButton( 'up', {left: 72, bottom: 120}, 48, 48, this.buttonImage, 0 ),
-            //     new ig.TouchButton( 'right', {left: 120, bottom: 72}, 48, 48, this.buttonImage, 1 ),
-            //     new ig.TouchButton( 'down', {left: 72, bottom: 24}, 48, 48, this.buttonImage, 2 ),
-            //     new ig.TouchButton( 'left', {left: 24, bottom: 72}, 48, 48, this.buttonImage, 3 ),
-            // ])
-            // this.shapeshitButtons = new ig.TouchButtonCollection([
-            //     new ig.TouchButton( 'shapeshift', {right: 24, bottom: 24}, 48, 48, this.buttonImage, 4 ),
-            // ])
-            // this.attackButtons = new ig.TouchButtonCollection([
-            //     new ig.TouchButton( 'attack', {right: 24, bottom: 96}, 48, 48, this.buttonImage, 4 ),
-            // ]);
-            
-            
             // If scale is 2
             this.movementButtons = new ig.TouchButtonCollection([
                 new ig.TouchButton( 'up', {left: 36, bottom: 60}, 24, 24, this.buttonImage, 0 ),
@@ -68,10 +52,8 @@ MyGame = ig.Game.extend({
             ig.input.bind( ig.KEY.LEFT_ARROW, 'left' )
             ig.input.bind( ig.KEY.RIGHT_ARROW, 'right' )
             
-            ig.input.bind( ig.KEY.PERIOD, 'attack')
-            
-            ig.input.bind( ig.KEY._1, 'one')
-            ig.input.bind( ig.KEY._2, 'two')
+            ig.input.bind( ig.KEY.X, 'attack')
+            ig.input.bind( ig.KEY.Z, 'shapeshift')
         }
         
         this.loadLevel( LevelWorld )
@@ -125,10 +107,6 @@ var dimensions = function() {
 }
 
 var scale = 2
-if (dimensions().x < 960) {
-    // scale = 1
-    scale = 2
-}
 
 $(document).ready(function() {
     var dim = dimensions()

@@ -47,7 +47,7 @@ LevelWorld=/*JSON[*/{
 		},
 		{
 			"type": "EntitySpawnpoint",
-			"x": 256,
+			"x": 228,
 			"y": 312
 		},
 		{
@@ -368,7 +368,7 @@ LevelWorld=/*JSON[*/{
 			"width": 64,
 			"height": 64,
 			"linkWithCollision": false,
-			"visible": true,
+			"visible": 1,
 			"tilesetName": "media/junk.png",
 			"repeat": false,
 			"preRender": false,

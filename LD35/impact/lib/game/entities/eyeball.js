@@ -46,6 +46,11 @@ ig.module(
             }
         },
 
+        receiveDamage: function(amount, other) {
+            this.aggroTarget = other.owner
+            this.parent(amount, other)
+        },
+
         update: function() {
             if (this.aggroTarget) {
                 var xDiff = this.pos.x - this.aggroTarget.pos.x

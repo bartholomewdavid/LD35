@@ -2,6 +2,7 @@ ig.module(
     'game.entities.character'
 )
 .requires(
+    'impact.timer',
     'game.elements',
     'game.entities.base',
     'game.entities.characterattack'
@@ -19,6 +20,8 @@ ig.module(
         speed: 40,
         isCharacter: true,
         health: 5,
+        attackCooldownTimer: null,
+        attackCooldownDuration: .3,
 
         init: function(x, y, settings) {
             this.addAnim('walkingDownNone', 0.333, [0,1,2,3]);
@@ -49,12 +52,14 @@ ig.module(
             this.addAnim('walkingLeftRightEarth', 0.333, [44,45,46,47]);
             this.addAnim('idleLeftEarth', 0.333, [44]);
             this.addAnim('idleRightEarth', 0.333, [44]);
+            
+            this.attackCooldownTimer = new ig.Timer()
 
             this.parent( x, y, settings );
         },
 
         update: function() {
-            if (ig.input.pressed('shapeshift') || ig.input.pressed('one')) {
+            if (ig.input.pressed('shapeshift')) {
                 switch (this.element) {
                     case Element.NONE:
                         this.element = Element.WATER
@@ -115,16 +120,20 @@ ig.module(
             // Attacking
             if (ig.input.pressed('attack')) {
                 if (this.element != Element.NONE) {
-                    // Attacking
-                    var center = this._center()
+                    if (this.attackCooldownTimer.delta() > 0) {
+                        // Attacking
+                        var center = this._center()
 
-                    ig.game.spawnEntity(
-                        EntityCharacterattack,
-                        center.x, center.y,
-                        {
-                            element: this.element,
-                            direction: this.direction
-                        })
+                        ig.game.spawnEntity(
+                            EntityCharacterattack,
+                            center.x, center.y,
+                            {
+                                element: this.element,
+                                direction: this.direction,
+                                owner: this
+                            })
+                        this.attackCooldownTimer.set(this.attackCooldownDuration)
+                    }
                 } else {
                     // Not attacking
                 }
