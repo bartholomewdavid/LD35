@@ -121,6 +121,12 @@ ig.module(
             this.parent();
         },
 
+        kill: function() {
+            this.parent()
+            
+            ig.game.respawnPlayer()
+        },
+
         _center: function() {
             return {
                 x: this.pos.x + (this.size.x / 2),
