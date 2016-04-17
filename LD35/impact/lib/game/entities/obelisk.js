@@ -10,7 +10,7 @@ ig.module(
 .defines(function() {
     EntityObelisk = EntityMonster.extend({
         animSheet: new ig.AnimationSheet('media/obeliskattack.png', 32, 64),
-        size: {x: 32, y: 32},
+        size: {x: 32, y: 64},
         type: ig.Entity.TYPE.B,
         collides: ig.Entity.COLLIDES.NEVER,
         checkAgainst: ig.Entity.TYPE.A,
