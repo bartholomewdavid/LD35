@@ -1,23 +1,20 @@
 ig.module( 'game.levels.world' )
-.requires( 'impact.image','game.entities.eyeball','game.entities.character','game.entities.obelisk','game.entities.wiseman','game.entities.eyeballboss','game.entities.spawnpoint' )
+.requires( 'impact.image','game.entities.eyeball','game.entities.wiseman','game.entities.spawnpoint','game.entities.character','game.entities.obelisk','game.entities.eyeballboss' )
 .defines(function(){
 LevelWorld=/*JSON[*/{
 	"entities": [
 		{
 			"type": "EntityEyeball",
-			"x": 184,
-			"y": 1212,
-			"settings": {
-				"element": "Fire"
-			}
-		},
-		{
-			"type": "EntityEyeball",
-			"x": 1592,
-			"y": 792,
+			"x": 880,
+			"y": 812,
 			"settings": {
 				"element": "Water"
 			}
+		},
+		{
+			"type": "EntityWiseman",
+			"x": 276,
+			"y": 252
 		},
 		{
 			"type": "EntityEyeball",
@@ -44,11 +41,40 @@ LevelWorld=/*JSON[*/{
 			}
 		},
 		{
+			"type": "EntitySpawnpoint",
+			"x": 228,
+			"y": 312
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1592,
+			"y": 792,
+			"settings": {
+				"element": "Water"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1368,
+			"y": 1876,
+			"settings": {
+				"element": "Water"
+			}
+		},
+		{
 			"type": "EntityEyeball",
 			"x": 792,
 			"y": 964,
 			"settings": {
 				"element": "Water"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 184,
+			"y": 1212,
+			"settings": {
+				"element": "Fire"
 			}
 		},
 		{
@@ -110,35 +136,9 @@ LevelWorld=/*JSON[*/{
 			"y": 1152
 		},
 		{
-			"type": "EntityWiseman",
-			"x": 276,
-			"y": 252
-		},
-		{
 			"type": "EntityEyeballboss",
 			"x": 1824,
 			"y": 1568
-		},
-		{
-			"type": "EntitySpawnpoint",
-			"x": 228,
-			"y": 312
-		},
-		{
-			"type": "EntityEyeball",
-			"x": 880,
-			"y": 812,
-			"settings": {
-				"element": "Water"
-			}
-		},
-		{
-			"type": "EntityEyeball",
-			"x": 1368,
-			"y": 1876,
-			"settings": {
-				"element": "Water"
-			}
 		},
 		{
 			"type": "EntityEyeball",
