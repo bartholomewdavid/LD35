@@ -2,6 +2,7 @@ ig.module(
     'game.entities.eyeball'
 )
 .requires(
+    'impact.timer',
     'game.entities.monster',
     'game.entities.eyeball.eyeballsensor'
 )
@@ -17,12 +18,15 @@ ig.module(
         speed: 12,
         health: 10,
         damage: 1,
+        damageCooldown: 1,
+        damageCooldownTimer: null,
 
         init: function(x, y, settings) {
             this.addAnim('idleWater', 0.333, [0,1,2]);
             this.addAnim('idleFire', 0.333, [3,4,5]);
             this.addAnim('idleAir', 0.333, [6,7,8]);
             this.addAnim('idleEarth', 0.333, [9,10,11]);
+            this.damageCooldownTimer = new ig.Timer()
             this.parent( x, y, settings );
             
             if(!ig.global.wm) {
@@ -36,7 +40,10 @@ ig.module(
         },
         
         check: function(other) {
-            other.receiveDamage(this.damage, this)
+            if (this.damageCooldownTimer.delta() > 0) {
+                other.receiveDamage(this.damage, this)
+                this.damageCooldownTimer.set(this.damageCooldown)
+            }
         },
 
         update: function() {
