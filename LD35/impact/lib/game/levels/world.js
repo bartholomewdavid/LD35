@@ -1,5 +1,5 @@
 ig.module( 'game.levels.world' )
-.requires( 'impact.image','game.entities.character','game.entities.monster','game.entities.eyeball' )
+.requires( 'impact.image','game.entities.character','game.entities.monster','game.entities.eyeball','game.entities.obelisk' )
 .defines(function(){
 LevelWorld=/*JSON[*/{
 	"entities": [
@@ -44,6 +44,11 @@ LevelWorld=/*JSON[*/{
 			"settings": {
 				"element": "Fire"
 			}
+		},
+		{
+			"type": "EntityObelisk",
+			"x": 160,
+			"y": 228
 		}
 	],
 	"layer": [
