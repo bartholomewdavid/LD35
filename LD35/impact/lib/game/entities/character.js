@@ -15,28 +15,40 @@ ig.module(
         collides: ig.Entity.COLLIDES.ACTIVE,
         xFlip: false,
         element: Element.NONE,
-        direction: 'down',
+        direction: 'Down',
         speed: 40,
         isCharacter: true,
         health: 5,
 
         init: function(x, y, settings) {
-            this.addAnim('idleNone', 0.333, [0]);
             this.addAnim('walkingDownNone', 0.333, [0,1,2,3]);
+            this.addAnim('idleDownNone', 0.333, [0]);
             this.addAnim('walkingUpNone', 0.333, [4,5,6,7]);
+            this.addAnim('idleUpNone', 0.333, [4]);
             this.addAnim('walkingLeftRightNone', 0.333, [8,9,10,11]);
-            this.addAnim('idleWater', 0.333, [12]);
+            this.addAnim('idleLeftNone', 0.333, [8]);
+            this.addAnim('idleRightNone', 0.333, [8]);
             this.addAnim('walkingDownWater', 0.333, [12,13,14,15]);
+            this.addAnim('idleDownWater', 0.333, [12]);
             this.addAnim('walkingUpWater', 0.333, [16,17,18,19]);
+            this.addAnim('idleUpWater', 0.333, [16]);
             this.addAnim('walkingLeftRightWater', 0.333, [20,21,22,23]);
-            this.addAnim('idleFire', 0.333, [24]);
+            this.addAnim('idleLeftWater', 0.333, [20]);
+            this.addAnim('idleRightWater', 0.333, [20]);
             this.addAnim('walkingDownFire', 0.333, [24,25,26,27]);
+            this.addAnim('idleDownFire', 0.333, [24]);
             this.addAnim('walkingUpFire', 0.333, [28,29,30,31]);
+            this.addAnim('idleUpFire', 0.333, [28]);
             this.addAnim('walkingLeftRightFire', 0.333, [32,33,34,35]);
-            this.addAnim('idleEarth', 0.333, [36]);
+            this.addAnim('idleLeftFire', 0.333, [32]);
+            this.addAnim('idleRightFire', 0.333, [32]);
             this.addAnim('walkingDownEarth', 0.333, [36,37,38,39]);
+            this.addAnim('idleDownEarth', 0.333, [36]);
             this.addAnim('walkingUpEarth', 0.333, [40,41,42,43]);
+            this.addAnim('idleUpEarth', 0.333, [40]);
             this.addAnim('walkingLeftRightEarth', 0.333, [44,45,46,47]);
+            this.addAnim('idleLeftEarth', 0.333, [44]);
+            this.addAnim('idleRightEarth', 0.333, [44]);
 
             this.parent( x, y, settings );
         },
@@ -80,20 +92,20 @@ ig.module(
 
             if (this.vel.y > 0) {
                 this.currentAnimString = 'walkingDown';
-                this.direction = 'down';
+                this.direction = 'Down';
             } else if (this.vel.y < 0) {
                 this.currentAnimString = 'walkingUp';
-                this.direction = 'up';
+                this.direction = 'Up';
             } else if (this.vel.x != 0) {
                 this.currentAnimString = 'walkingLeftRight';
                 if (this.vel.x < 0) {
-                    this.direction = 'left';
+                    this.direction = 'Left';
                 }
                 if (this.vel.x > 0) {
-                    this.direction = 'right';
+                    this.direction = 'Right';
                 }
             } else {
-                this.currentAnimString = 'idle';
+                this.currentAnimString = 'idle'+this.direction;
             }
 
             // Animation Set and Flipping

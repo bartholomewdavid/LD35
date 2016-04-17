@@ -17,7 +17,7 @@ ig.module(
         xFlip: false,
         yFlip: false,
         element: Element.NONE,
-        direction: 'down',
+        direction: 'Down',
         speed: 100,
         friction: {x: 0, y: 0},
         lifeDuration: 1.5,
@@ -53,28 +53,28 @@ ig.module(
             }
 
             switch (this.direction) {
-                case 'up':
+                case 'Up':
                     this.vel.x = 0
                     this.vel.y = -this.speed
                     this.xFlip = false
                     this.yFlip = false
                     this.currentAnimString = 'idleUpDown'
                     break;
-                case 'down':
+                case 'Down':
                     this.vel.x = 0
                     this.vel.y = this.speed
                     this.xFlip = true
                     this.yFlip = true
                     this.currentAnimString = 'idleUpDown'
                     break;
-                case 'left':
+                case 'Left':
                     this.vel.x = -this.speed
                     this.vel.y = 0
                     this.xFlip = true
                     this.yFlip = true
                     this.currentAnimString = 'idleLeftRight'
                     break;
-                case 'right':
+                case 'Right':
                     this.vel.x = this.speed
                     this.vel.y = 0
                     this.xFlip = false

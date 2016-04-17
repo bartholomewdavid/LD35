@@ -10,7 +10,7 @@ ig.module(
 )
 .defines(function() {
     EntityWiseman = EntityBase.extend({
-        animSheet: new ig.AnimationSheet('media/base.png', 32, 32),
+        animSheet: new ig.AnimationSheet('media/wiseman.png', 32, 32),
         font: new ig.Font( 'media/04b03.font.png' ),
         size: {x: 18, y: 20},
         offset: {x: 7, y: 12},
@@ -43,7 +43,7 @@ ig.module(
             
             if (this.chatTimer.delta() < 0) {
                 this.font.draw( 
-                    'The evil eyes killed out village. \nI think they originated from the south.', 
+                    'The evil eyes killed our village. \nTheir home is to the south.', 
                      this.pos.x - ig.game.screen.x + 6, 
                      this.pos.y - ig.game.screen.y - 18, 
                     ig.Font.ALIGN.CENTER );
