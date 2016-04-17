@@ -28,6 +28,10 @@ ig.module(
             this.addAnim('idleUpDownNone', 0.1, [3,4,5])
             this.addAnim('idleLeftRight' + Element.WATER, 0.1, [6,7,8])
             this.addAnim('idleUpDown' + Element.WATER, 0.1, [9,10,11])
+            this.addAnim('idleLeftRight' + Element.FIRE, 0.1, [12,13,14])
+            this.addAnim('idleUpDown' + Element.FIRE, 0.1, [15,16,17])
+            this.addAnim('idleLeftRight' + Element.EARTH, 0.1, [18,19,20])
+            this.addAnim('idleUpDown' + Element.EARTH, 0.1, [21,22,23])
 
             this.lifeTimer = new ig.Timer()
             this.lifeTimer.set(this.lifeDuration)

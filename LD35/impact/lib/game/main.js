@@ -47,7 +47,8 @@ MyGame = ig.Game.extend({
             ig.input.bind( ig.KEY._2, 'two')
         }
         
-        this.loadLevel( LevelTest )
+        this.loadLevel( LevelWorld )
+        // this.loadLevel( LevelTest )
         
         this.player = this.getEntitiesByType( EntityCharacter )[0]
     },
