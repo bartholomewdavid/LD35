@@ -23,7 +23,10 @@ ig.module(
         },
 
         receiveDamage: function(amount, attacker) {
-            var damage = amount * ElementMultiplier[attacker.element][this.element];
+            var damage = amount;
+            if (this.element != Element.NONE) {
+                damage = amount * ElementMultiplier[attacker.element][this.element];
+            }
             this.parent(damage, attacker);
         },
 
