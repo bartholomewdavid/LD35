@@ -1,12 +1,12 @@
 ig.module( 'game.levels.world' )
-.requires( 'impact.image','game.entities.character','game.entities.eyeball','game.entities.wiseman','game.entities.spawnpoint' )
+.requires( 'impact.image','game.entities.character','game.entities.eyeball','game.entities.wiseman','game.entities.spawnpoint','game.entities.eyeballboss' )
 .defines(function(){
 LevelWorld=/*JSON[*/{
 	"entities": [
 		{
 			"type": "EntityCharacter",
-			"x": 263,
-			"y": 320
+			"x": 1423,
+			"y": 1704
 		},
 		{
 			"type": "EntityEyeball",
@@ -47,8 +47,13 @@ LevelWorld=/*JSON[*/{
 		},
 		{
 			"type": "EntitySpawnpoint",
-			"x": 256,
+			"x": 228,
 			"y": 312
+		},
+		{
+			"type": "EntityEyeballboss",
+			"x": 1572,
+			"y": 1648
 		}
 	],
 	"layer": [
@@ -358,7 +363,7 @@ LevelWorld=/*JSON[*/{
 			"width": 64,
 			"height": 64,
 			"linkWithCollision": false,
-			"visible": true,
+			"visible": 1,
 			"tilesetName": "media/junk.png",
 			"repeat": false,
 			"preRender": false,

@@ -1,25 +1,29 @@
 ig.module(
-    'game.entities.eyeball'
+    'game.entities.eyeballboss'
 )
 .requires(
     'impact.timer',
+    'plugins.underscore',
     'game.entities.monster',
     'game.entities.eyeball.eyeballsensor'
 )
 .defines(function() {
-    EntityEyeball = EntityMonster.extend({
-        animSheet: new ig.AnimationSheet('media/eyeballs.png', 32, 32),
-        size: {x: 32, y: 32},
+    EntityEyeballboss = EntityMonster.extend({
+        animSheet: new ig.AnimationSheet('media/eyeballsbig.png', 128, 128),
+        size: {x: 96, y: 96},
+        offset: {x: 16, y: 0},
         type: ig.Entity.TYPE.B,
         collides: ig.Entity.COLLIDES.NEVER,
         checkAgainst: ig.Entity.TYPE.A,
         xFlip: false,
         element: 'Water',
         speed: 12,
-        health: 10,
-        damage: 1,
+        health: 100,
+        damage: 2,
         damageCooldown: 1,
         damageCooldownTimer: null,
+        elementChangerTimer: null,
+        elementChangerDuration: 6,
 
         init: function(x, y, settings) {
             this.addAnim('idleWater', 0.333, [0,1,2]);
@@ -27,6 +31,7 @@ ig.module(
             this.addAnim('idleAir', 0.333, [6,7,8]);
             this.addAnim('idleEarth', 0.333, [9,10,11]);
             this.damageCooldownTimer = new ig.Timer()
+            this.elementChangerTimer = new ig.Timer()
             this.parent( x, y, settings );
             
             if(!ig.global.wm) {
@@ -52,6 +57,13 @@ ig.module(
         },
 
         update: function() {
+            if (this.elementChangerTimer.delta() > 0) {
+                this.elementChangerTimer.set(this.elementChangerDuration)
+                
+                this.element = ['Water', 'Fire', 'Earth'][_.random(0,2)]
+                console.log(this.element)
+            }
+            
             if (this.aggroTarget) {
                 var xDiff = this.pos.x - this.aggroTarget.pos.x
                 if (xDiff < 0) {

@@ -35,6 +35,7 @@ ig.module(
 
             this.lifeTimer = new ig.Timer()
             this.lifeTimer.set(this.lifeDuration)
+            this.owner = settings.owner
 
             this.parent( x, y, settings );
 
