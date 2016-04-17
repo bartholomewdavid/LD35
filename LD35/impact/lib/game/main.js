@@ -107,13 +107,17 @@ $(document).ready(function() {
 $(document).on("orientationchange", function() {
 	var dim = dimensions()
     ig.system.resize(dim.x / scale, dim.y / scale, scale)
-    ig.game.buttons.align()
+    if (ig.game.buttons) {
+        ig.game.buttons.align()
+    }
 });
 
 $(window).on('resize', function() {
     var dim = dimensions()
     ig.system.resize(dim.x / scale, dim.y / scale, scale)
-    ig.game.buttons.align();
+    if (ig.game.buttons) {
+        ig.game.buttons.align()
+    }
 })
 
 });
