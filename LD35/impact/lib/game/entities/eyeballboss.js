@@ -4,6 +4,7 @@ ig.module(
 .requires(
     'impact.timer',
     'plugins.underscore',
+    'game.elements',
     'game.entities.monster',
     'game.entities.eyeball.eyeballsensor'
 )
@@ -60,8 +61,7 @@ ig.module(
             if (this.elementChangerTimer.delta() > 0) {
                 this.elementChangerTimer.set(this.elementChangerDuration)
                 
-                this.element = ['Water', 'Fire', 'Earth'][_.random(0,2)]
-                console.log(this.element)
+                this.element = [Element.WATER, Element.FIRE, Element.EARTH][_.random(0,2)]
             }
             
             if (this.aggroTarget) {
