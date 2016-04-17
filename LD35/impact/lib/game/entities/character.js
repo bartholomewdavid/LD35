@@ -135,7 +135,7 @@ ig.module(
 
         kill: function() {
             this.parent()
-            
+
             ig.game.respawnPlayer()
         },
 

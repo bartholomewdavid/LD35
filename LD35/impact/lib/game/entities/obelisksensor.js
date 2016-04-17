@@ -5,7 +5,7 @@ ig.module(
     'game.entities.base'
 )
 .defines(function() {
-    EntityObeliskSensor = EntityBase.extend({
+    EntityObelisksensor = EntityBase.extend({
         size: {x: 256, y: 256},
         collides: ig.Entity.COLLIDES.NEVER,
         type: ig.Entity.TYPE.NONE,

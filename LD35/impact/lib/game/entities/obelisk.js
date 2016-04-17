@@ -4,7 +4,8 @@ ig.module(
 .requires(
     'game.elements',
     'game.entities.monster',
-    'game.entities.obelisksensor'
+    'game.entities.obelisksensor',
+    'game.entities.obelisklaser'
 )
 .defines(function() {
     EntityObelisk = EntityMonster.extend({
@@ -16,31 +17,29 @@ ig.module(
         element: Element.NONE,
         speed: 0,
         health: 10,
-        damage: 0,
         cooldown: 3,
-        attacking: false,
         attackDistance: 140,
+        damage: 1,
+        damageCooldown: 3,
+        damageCooldownTimer: null,
+        attacking: false,
 
         init: function(x, y, settings) {
             this.addAnim('idle', 0.333, [0]);
-            this.addAnim('chargeUp', 0.15, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]);
-            this.addAnim('coolDown', 0.333, [18, 19, 20]);
+            this.addAnim('chargeUp', 0.15, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], true);
+            this.addAnim('coolDown', 0.333, [18, 19, 20], true);
             this.parent( x, y, settings );
+            this.damageCooldownTimer = new ig.Timer()
 
             if(!ig.global.wm) {
                 ig.game.spawnEntity(
-                    EntityObeliskSensor,
+                    EntityObelisksensor,
                     this.pos.x, this.pos.y,
                     {
                         owner: this
                     })
             }
               this.currentAnim = this.anims['idle']
-        },
-
-        check: function(other) {
-            other.receiveDamage(this.damage, this)
-            console.log('test');
         },
 
         update: function() {
@@ -53,19 +52,32 @@ ig.module(
         },
 
         attack: function(target) {
-            // TODO: Only attack once cooling down is complete
-            this.attacking = true;
-            this.currentAnim = this.anims['chargeUp'];
-            setTimeout(function() {
-                if (this.distanceTo(this.aggroTarget) < this.attackDistance) {
-                    // TODO: Deal damage to target
-                    this.coolDown();
+            if (this.damageCooldownTimer.delta() > 0) {
+                if (!this.attacking) {
+                    this.attacking = true;
+                    this.currentAnim = this.anims['chargeUp'];
+                    this.currentAnim.rewind();
+                    setTimeout(function() {
+                        if (this.distanceTo(this.aggroTarget) < this.attackDistance) {
+                            target.receiveDamage(this.damage, this)
+                            if(!ig.global.wm) {
+                                var targetCenter = this.aggroTarget._center();
+                                ig.game.spawnEntity(
+                                    EntityObelisklaser, targetCenter.x, targetCenter.y
+                                )
+                            }
+                        }
+                        this.coolDown();
+                        this.attacking = false;
+                    }.bind(this), this.currentAnim.frameTime * this.currentAnim.sequence.length * 1000);
                 }
-            }.bind(this), this.currentAnim.frameTime * this.currentAnim.sequence.length * 1000);
+            }
         },
 
         coolDown: function() {
             this.currentAnim = this.anims['coolDown'];
+            this.currentAnim.rewind();
+            this.damageCooldownTimer.set(this.damageCooldown)
             setTimeout(function() {
                 this.currentAnim = this.anims['idle'];
             }.bind(this), this.currentAnim.frameTime * this.currentAnim.sequence.length * 1000);
