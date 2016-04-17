@@ -58,7 +58,7 @@ ig.module(
                     this.currentAnim = this.anims['chargeUp'];
                     this.currentAnim.rewind();
                     setTimeout(function() {
-                        if (this.distanceTo(this.aggroTarget) < this.attackDistance) {
+                        if (this.distanceTo(this.aggroTarget) < this.attackDistance && this.health > 0) {
                             target.receiveDamage(this.damage, this)
                             if(!ig.global.wm) {
                                 var targetCenter = this.aggroTarget._center();
