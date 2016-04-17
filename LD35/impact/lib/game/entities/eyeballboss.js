@@ -60,10 +60,6 @@ ig.module(
         update: function() {
             if (this.elementChangerTimer.delta() > 0) {
                 this.elementChangerTimer.set(this.elementChangerDuration)
-<<<<<<< HEAD
-                
-=======
->>>>>>> master
                 this.element = [Element.WATER, Element.FIRE, Element.EARTH][_.random(0,2)]
             }
             
