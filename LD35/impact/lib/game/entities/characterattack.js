@@ -18,10 +18,11 @@ ig.module(
         yFlip: false,
         element: Element.NONE,
         direction: 'Down',
-        speed: 100,
+        speed: 140,
         friction: {x: 0, y: 0},
         lifeDuration: 1.5,
         lifeTimer: null,
+        damage: 1,
 
         init: function(x, y, settings) {
             this.addAnim('idleLeftRightNone', 0.1, [0,1,2])
@@ -44,7 +45,7 @@ ig.module(
         },
         
         check: function(other) {
-            other.receiveDamage(1, this)
+            other.receiveDamage(this.damage, this)
             this.kill()
         },
 

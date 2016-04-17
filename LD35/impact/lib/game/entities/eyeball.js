@@ -4,7 +4,8 @@ ig.module(
 .requires(
     'impact.timer',
     'game.entities.monster',
-    'game.entities.eyeball.eyeballsensor'
+    'game.entities.eyeball.eyeballsensor',
+    'game.entities.eyeball.eyeballactivation'
 )
 .defines(function() {
     EntityEyeball = EntityMonster.extend({
@@ -15,11 +16,12 @@ ig.module(
         checkAgainst: ig.Entity.TYPE.A,
         xFlip: false,
         element: 'Water',
-        speed: 12,
-        health: 10,
+        speed: 18,
+        health: 6,
         damage: 1,
         damageCooldown: 1,
         damageCooldownTimer: null,
+        enabled: false,
 
         init: function(x, y, settings) {
             this.addAnim('idleWater', 0.333, [0,1,2]);
@@ -32,6 +34,13 @@ ig.module(
             if(!ig.global.wm) {
                 ig.game.spawnEntity(
                     EntityEyeballsensor,
+                    this.pos.x, this.pos.y,
+                    {
+                        owner: this
+                    })
+                    
+                ig.game.spawnEntity(
+                    EntityEyeballactivation,
                     this.pos.x, this.pos.y,
                     {
                         owner: this
@@ -52,6 +61,8 @@ ig.module(
         },
 
         update: function() {
+            if (!this.enabled) { return }
+            
             if (this.aggroTarget) {
                 var xDiff = this.pos.x - this.aggroTarget.pos.x
                 if (xDiff < 0) {

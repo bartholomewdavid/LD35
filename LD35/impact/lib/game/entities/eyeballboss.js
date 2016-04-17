@@ -6,7 +6,9 @@ ig.module(
     'plugins.underscore',
     'game.elements',
     'game.entities.monster',
-    'game.entities.eyeball.eyeballsensor'
+    'game.entities.eyeball',
+    'game.entities.eyeball.eyeballsensor',
+    'game.entities.eyeball.eyeballactivation'
 )
 .defines(function() {
     EntityEyeballboss = EntityMonster.extend({
@@ -25,6 +27,8 @@ ig.module(
         damageCooldownTimer: null,
         elementChangerTimer: null,
         elementChangerDuration: 6,
+        eyeballSpawnerTimer: null,
+        eyeballSpawnerDuration: 10,
 
         init: function(x, y, settings) {
             this.addAnim('idleWater', 0.333, [0,1,2]);
@@ -33,11 +37,19 @@ ig.module(
             this.addAnim('idleEarth', 0.333, [9,10,11]);
             this.damageCooldownTimer = new ig.Timer()
             this.elementChangerTimer = new ig.Timer()
+            this.eyeballSpawnerTimer = new ig.Timer()
             this.parent( x, y, settings );
             
             if(!ig.global.wm) {
                 ig.game.spawnEntity(
                     EntityEyeballsensor,
+                    this.pos.x, this.pos.y,
+                    {
+                        owner: this
+                    })
+                    
+                ig.game.spawnEntity(
+                    EntityEyeballactivation,
                     this.pos.x, this.pos.y,
                     {
                         owner: this
@@ -56,15 +68,35 @@ ig.module(
             this.aggroTarget = other.owner
             this.parent(amount, other)
         },
+        
+        kill: function() {
+            ig.game.win()
+            this.parent()
+        },
 
-        update: function() {
-            if (this.elementChangerTimer.delta() > 0) {
-                this.elementChangerTimer.set(this.elementChangerDuration)
-                this.element = [Element.WATER, Element.FIRE, Element.EARTH][_.random(0,2)]
-            }
+        update: function() {       
+            if (!this.enabled) { return }
             
             if (this.aggroTarget) {
-                var xDiff = this.pos.x - this.aggroTarget.pos.x
+                if (this.elementChangerTimer.delta() > 0) {
+                    this.elementChangerTimer.set(this.elementChangerDuration)
+                    this.element = [Element.WATER, Element.FIRE, Element.EARTH][_.random(0,2)]
+                }
+                
+                if (this.eyeballSpawnerTimer.delta() > 0) {
+                    // Spawn a thing
+                    ig.game.spawnEntity(
+                        EntityEyeball,
+                        this.pos.x, this.pos.y,
+                        {
+                            element: this.element,
+                        })
+                    
+                    this.eyeballSpawnerTimer.set(this.eyeballSpawnerDuration)
+                }
+                
+                var center = this._center()
+                var xDiff = center.x - this.aggroTarget.pos.x
                 if (xDiff < 0) {
                     this.vel.x = (this.speed > Math.abs(xDiff)) ? 0 : this.speed
                 } else if (xDiff > 0) {
@@ -73,9 +105,9 @@ ig.module(
                     this.vel.x = 0
                 }
                 
-                if (this.pos.y < this.aggroTarget.pos.y) {
+                if (center.y < this.aggroTarget.pos.y) {
                     this.vel.y = this.speed
-                } else if (this.pos.y > this.aggroTarget.pos.y) {
+                } else if (center.y > this.aggroTarget.pos.y) {
                     this.vel.y = -this.speed
                 }
             }

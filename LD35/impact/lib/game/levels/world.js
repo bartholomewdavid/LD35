@@ -1,12 +1,100 @@
 ig.module( 'game.levels.world' )
-.requires( 'impact.image','game.entities.character','game.entities.eyeball','game.entities.wiseman','game.entities.spawnpoint','game.entities.eyeballboss','game.entities.obelisk' )
+.requires( 'impact.image','game.entities.eyeball','game.entities.character','game.entities.obelisk','game.entities.wiseman','game.entities.eyeballboss','game.entities.spawnpoint' )
 .defines(function(){
 LevelWorld=/*JSON[*/{
 	"entities": [
 		{
+			"type": "EntityEyeball",
+			"x": 184,
+			"y": 1212,
+			"settings": {
+				"element": "Fire"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1592,
+			"y": 792,
+			"settings": {
+				"element": "Water"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1776,
+			"y": 84,
+			"settings": {
+				"element": "Fire"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1560,
+			"y": 752,
+			"settings": {
+				"element": "Fire"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1372,
+			"y": 212,
+			"settings": {
+				"element": "Water"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 792,
+			"y": 964,
+			"settings": {
+				"element": "Water"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 320,
+			"y": 1096,
+			"settings": {
+				"element": "Fire"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 752,
+			"y": 840,
+			"settings": {
+				"element": "Water"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 272,
+			"y": 1384,
+			"settings": {
+				"element": "Fire"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1440,
+			"y": 1384,
+			"settings": {
+				"element": "Earth"
+			}
+		},
+		{
 			"type": "EntityCharacter",
-			"x": 951,
-			"y": 1288
+			"x": 263,
+			"y": 320
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 520,
+			"y": 1276,
+			"settings": {
+				"element": "Fire"
+			}
 		},
 		{
 			"type": "EntityEyeball",
@@ -17,28 +105,9 @@ LevelWorld=/*JSON[*/{
 			}
 		},
 		{
-			"type": "EntityEyeball",
-			"x": 1708,
-			"y": 376,
-			"settings": {
-				"element": "Fire"
-			}
-		},
-		{
-			"type": "EntityEyeball",
-			"x": 960,
-			"y": 224,
-			"settings": {
-				"element": "Fire"
-			}
-		},
-		{
-			"type": "EntityEyeball",
-			"x": 1372,
-			"y": 212,
-			"settings": {
-				"element": "Fire"
-			}
+			"type": "EntityObelisk",
+			"x": 832,
+			"y": 1152
 		},
 		{
 			"type": "EntityWiseman",
@@ -46,19 +115,163 @@ LevelWorld=/*JSON[*/{
 			"y": 252
 		},
 		{
-			"type": "EntitySpawnpoint",
-			"x": 228,
-			"y": 312
-		},
-		{
 			"type": "EntityEyeballboss",
 			"x": 1824,
 			"y": 1568
 		},
 		{
+			"type": "EntitySpawnpoint",
+			"x": 228,
+			"y": 312
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 880,
+			"y": 812,
+			"settings": {
+				"element": "Water"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1368,
+			"y": 1876,
+			"settings": {
+				"element": "Water"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 164,
+			"y": 928,
+			"settings": {
+				"element": "Fire"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 360,
+			"y": 1600,
+			"settings": {
+				"element": "Fire"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1504,
+			"y": 1584,
+			"settings": {
+				"element": "Fire"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 348,
+			"y": 1808,
+			"settings": {
+				"element": "Fire"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1076,
+			"y": 1268,
+			"settings": {
+				"element": "Earth"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1876,
+			"y": 1928,
+			"settings": {
+				"element": "Earth"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1932,
+			"y": 1064,
+			"settings": {
+				"element": "Earth"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1656,
+			"y": 1192,
+			"settings": {
+				"element": "Earth"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1908,
+			"y": 1316,
+			"settings": {
+				"element": "Earth"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 916,
+			"y": 1360,
+			"settings": {
+				"element": "Earth"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1236,
+			"y": 1644,
+			"settings": {
+				"element": "Earth"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 632,
+			"y": 1580,
+			"settings": {
+				"element": "Fire"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1124,
+			"y": 1804,
+			"settings": {
+				"element": "Fire"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1632,
+			"y": 820,
+			"settings": {
+				"element": "Water"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1592,
+			"y": 1772,
+			"settings": {
+				"element": "Water"
+			}
+		},
+		{
+			"type": "EntityEyeball",
+			"x": 1712,
+			"y": 376,
+			"settings": {
+				"element": "Fire"
+			}
+		},
+		{
 			"type": "EntityObelisk",
-			"x": 840,
-			"y": 1164
+			"x": 196,
+			"y": 864
 		}
 	],
 	"layer": [

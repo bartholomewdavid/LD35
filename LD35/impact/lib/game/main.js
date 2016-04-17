@@ -20,9 +20,15 @@ MyGame = ig.Game.extend({
     attackButtons: null,
     shapeshitButtons: null,
     buttonImage: new ig.Image( 'media/buttons.png' ),
+<<<<<<< HEAD
+    font: new ig.Font( 'media/04b03.font.png' ),
+    
+    init: function() {        
+=======
     heartImage: new ig.Image('media/heart.png'),
 
     init: function() {
+>>>>>>> master
         if( ig.ua.mobile ) {
             // If scale is 2
             this.movementButtons = new ig.TouchButtonCollection([
@@ -73,16 +79,22 @@ MyGame = ig.Game.extend({
                 this.player.pos.y - (ig.system.height / 2)
         }
     },
-
+    
     draw: function() {
-        this.parent()
-
-        if( this.movementButtons ) {
-            this.movementButtons.draw()
-            this.shapeshitButtons.draw()
-            if (this.player.element != Element.NONE) {
-                this.attackButtons.draw()
+        if (!this.gameWon) {               
+            this.parent()
+            
+            if( this.movementButtons ) {
+                this.movementButtons.draw()
+                this.shapeshitButtons.draw()
+                if (this.player.element != Element.NONE) {
+                    this.attackButtons.draw()
+                }
             }
+        } else {
+            ig.system.clear(this.clearColor)
+            this.font.draw( 'Game Over!', ig.system.width / 2, ig.system.height / 2, ig.Font.ALIGN.CENTER );
+            this.font.draw( 'You defeated the eye and avenged your village.', ig.system.width / 2, (ig.system.height / 2) + 16, ig.Font.ALIGN.CENTER );
         }
         if (this.player) {
             for (var i = 0; i < this.player.health; i++) {
@@ -95,6 +107,10 @@ MyGame = ig.Game.extend({
         this.player = ig.game.spawnEntity(
             EntityCharacter,
             this.spawnPoint.pos.x, this.spawnPoint.pos.y, {})
+    },
+    
+    win: function() {
+        this.gameWon = true
     }
 });
 
