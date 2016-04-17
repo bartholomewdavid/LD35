@@ -29,25 +29,31 @@ ig.module(
             this.addAnim('walkingDownWater', 0.333, [12,13,14,15]);
             this.addAnim('walkingUpWater', 0.333, [16,17,18,19]);
             this.addAnim('walkingLeftRightWater', 0.333, [20,21,22,23]);
+            this.addAnim('idleFire', 0.333, [24]);
+            this.addAnim('walkingDownFire', 0.333, [24,25,26,27]);
+            this.addAnim('walkingUpFire', 0.333, [28,29,30,31]);
+            this.addAnim('walkingLeftRightFire', 0.333, [32,33,34,35]);
+            this.addAnim('idleEarth', 0.333, [36]);
+            this.addAnim('walkingDownEarth', 0.333, [36,37,38,39]);
+            this.addAnim('walkingUpEarth', 0.333, [40,41,42,43]);
+            this.addAnim('walkingLeftRightEarth', 0.333, [44,45,46,47]);
 
             this.parent( x, y, settings );
         },
 
         update: function() {
-            // Elemental Animation Sets
-            if (ig.input.pressed('one')) {
-                this.element = Element.NONE;
-            }
-            if (ig.input.pressed('two')) {
-                this.element = Element.WATER;
-            }
-
-            if (ig.input.pressed('shapeshift')) {
+            if (ig.input.pressed('shapeshift') || ig.input.pressed('one')) {
                 switch (this.element) {
                     case Element.NONE:
                         this.element = Element.WATER
                         break;
                     case Element.WATER:
+                        this.element = Element.FIRE
+                        break;
+                    case Element.FIRE:
+                        this.element = Element.EARTH
+                        break;
+                    case Element.EARTH:
                         this.element = Element.NONE
                         break;
                 }

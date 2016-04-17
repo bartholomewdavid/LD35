@@ -21,14 +21,18 @@ ig.module(
         init: function(x, y, settings) {
             this.addAnim('idleWater', 0.333, [0,1,2]);
             this.addAnim('idleFire', 0.333, [3,4,5]);
+            this.addAnim('idleAir', 0.333, [6,7,8]);
+            this.addAnim('idleEarth', 0.333, [9,10,11]);
             this.parent( x, y, settings );
             
-            ig.game.spawnEntity(
-                EntityEyeballsensor,
-                this.pos.x, this.pos.y,
-                {
-                    owner: this
-                })
+            if(!ig.global.wm) {
+                ig.game.spawnEntity(
+                    EntityEyeballsensor,
+                    this.pos.x, this.pos.y,
+                    {
+                        owner: this
+                    })
+            }
         },
         
         check: function(other) {
