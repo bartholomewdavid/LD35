@@ -4,6 +4,7 @@ ig.module(
 .requires(
 	'impact.game',
 	'impact.font',
+	'game.elements',
     'game.levels.world',
     'game.levels.test',
     'game.entities.character',
@@ -15,25 +16,50 @@ ig.module(
 MyGame = ig.Game.extend({
     player: null,
     
-    buttons: null,
+    movementButtons: null,
+    attackButtons: null,
+    shapeshitButtons: null,
     buttonImage: new ig.Image( 'media/buttons.png' ),
+    // buttonImage: new ig.Image( 'media/buttonsbig.png' ),
     
     init: function() {        
         if( ig.ua.mobile ) {
-            this.buttons = new ig.TouchButtonCollection([
-                new ig.TouchButton( 'up', {left: 24, bottom: 48}, 24, 24, this.buttonImage, 0 ),
-                new ig.TouchButton( 'right', {left: 48, bottom: 24}, 24, 24, this.buttonImage, 1 ),
-                new ig.TouchButton( 'down', {left: 24, bottom: 0}, 24, 24, this.buttonImage, 2 ),
-                new ig.TouchButton( 'left', {left: 0, bottom: 24}, 24, 24, this.buttonImage, 3 ),
-                new ig.TouchButton( 'attack', {right: 12, bottom: 12}, 24, 24, this.buttonImage, 4 ),
-                new ig.TouchButton( 'shapeshift', {right: 12, bottom: 48}, 24, 24, this.buttonImage, 4 ),
+            // If scale is 1
+            // this.movementButtons = new ig.TouchButtonCollection([
+            //     new ig.TouchButton( 'up', {left: 72, bottom: 120}, 48, 48, this.buttonImage, 0 ),
+            //     new ig.TouchButton( 'right', {left: 120, bottom: 72}, 48, 48, this.buttonImage, 1 ),
+            //     new ig.TouchButton( 'down', {left: 72, bottom: 24}, 48, 48, this.buttonImage, 2 ),
+            //     new ig.TouchButton( 'left', {left: 24, bottom: 72}, 48, 48, this.buttonImage, 3 ),
+            // ])
+            // this.shapeshitButtons = new ig.TouchButtonCollection([
+            //     new ig.TouchButton( 'shapeshift', {right: 24, bottom: 24}, 48, 48, this.buttonImage, 4 ),
+            // ])
+            // this.attackButtons = new ig.TouchButtonCollection([
+            //     new ig.TouchButton( 'attack', {right: 24, bottom: 96}, 48, 48, this.buttonImage, 4 ),
+            // ]);
+            
+            
+            // If scale is 2
+            this.movementButtons = new ig.TouchButtonCollection([
+                new ig.TouchButton( 'up', {left: 36, bottom: 60}, 24, 24, this.buttonImage, 0 ),
+                new ig.TouchButton( 'right', {left: 60, bottom: 36}, 24, 24, this.buttonImage, 1 ),
+                new ig.TouchButton( 'down', {left: 36, bottom: 12}, 24, 24, this.buttonImage, 2 ),
+                new ig.TouchButton( 'left', {left: 12, bottom: 35}, 24, 24, this.buttonImage, 3 ),
+            ])
+            this.shapeshitButtons = new ig.TouchButtonCollection([
+                new ig.TouchButton( 'shapeshift', {right: 12, bottom: 12}, 24, 24, this.buttonImage, 4 ),
+            ])
+            this.attackButtons = new ig.TouchButtonCollection([
+                new ig.TouchButton( 'attack', {right: 12, bottom: 48}, 24, 24, this.buttonImage, 4 ),
             ]);
             
             // Align the touch buttons to the screen edges; you have 
             // to call this function once after creating the 
             // TouchButtonCollection and then every time you change 
             // the game's screen size
-            this.buttons.align();
+            this.movementButtons.align();
+            this.shapeshitButtons.align();
+            this.attackButtons.align();
         } else {
             // initialize your game world, bind some 
             // keys, etc.
@@ -68,8 +94,12 @@ MyGame = ig.Game.extend({
     draw: function() {       
         this.parent()
         
-        if( this.buttons ) {
-            this.buttons.draw(); 
+        if( this.movementButtons ) {
+            this.movementButtons.draw()
+            this.shapeshitButtons.draw()
+            if (this.player.element != Element.NONE) {
+                this.attackButtons.draw()
+            }
         }
     },
     
@@ -96,6 +126,7 @@ var dimensions = function() {
 
 var scale = 2
 if (dimensions().x < 960) {
+    // scale = 1
     scale = 2
 }
 
@@ -107,16 +138,20 @@ $(document).ready(function() {
 $(document).on("orientationchange", function() {
 	var dim = dimensions()
     ig.system.resize(dim.x / scale, dim.y / scale, scale)
-    if (ig.game.buttons) {
-        ig.game.buttons.align()
+    if (ig.game.movementButtons) {
+        ig.game.movementButtons.align()
+        ig.game.shapeshitButtons.align()
+        ig.game.attackButtons.align()
     }
 });
 
 $(window).on('resize', function() {
     var dim = dimensions()
     ig.system.resize(dim.x / scale, dim.y / scale, scale)
-    if (ig.game.buttons) {
-        ig.game.buttons.align()
+    if (ig.game.movementButtons) {
+        ig.game.movementButtons.align()
+        ig.game.shapeshitButtons.align()
+        ig.game.attackButtons.align()
     }
 })
 
