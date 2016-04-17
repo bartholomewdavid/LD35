@@ -16,7 +16,7 @@ ig.module(
         element: 'Water',
         speed: 12,
         health: 10,
-        damage: 0,
+        damage: 1,
 
         init: function(x, y, settings) {
             this.addAnim('idleWater', 0.333, [0,1,2]);

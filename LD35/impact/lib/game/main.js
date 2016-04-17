@@ -7,6 +7,7 @@ ig.module(
     'game.levels.world',
     'game.levels.test',
     'game.entities.character',
+    'game.entities.spawnpoint',
     'plugins.touch-button'
 )
 .defines(function(){
@@ -48,9 +49,9 @@ MyGame = ig.Game.extend({
         }
         
         this.loadLevel( LevelWorld )
-        // this.loadLevel( LevelTest )
         
         this.player = this.getEntitiesByType( EntityCharacter )[0]
+        this.spawnPoint = this.getEntitiesByType( EntitySpawnpoint )[0]
     },
     
     update: function() {
@@ -70,6 +71,12 @@ MyGame = ig.Game.extend({
         if( this.buttons ) {
             this.buttons.draw(); 
         }
+    },
+    
+    respawnPlayer: function() {
+        this.player = ig.game.spawnEntity(
+            EntityCharacter,
+            this.spawnPoint.pos.x, this.spawnPoint.pos.y, {})
     }
 });
 
